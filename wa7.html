@@ -1,0 +1,146 @@
+<html>
+<body>
+    <h1> Version 1</h1>
+    <p> For my first version, I manipulated the data values by updating the data.json file with new numbers.</p>
+
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<script type="text/javascript">
+
+$.getJSON("data.json", function(data){
+
+    console.log("hey you got data")
+    console.log(data)
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My New Dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: data
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+
+        }
+    });
+
+})
+</script>
+<h1> Version 2</h1>
+<p>For my second version, I changed the background color as well as the point background color to help the actual data points stand out. In addition I added a title.</p>
+<canvas id="version2"></canvas>
+<script type="text/javascript">
+
+$.getJSON("data.json", function(data){
+
+    console.log("hey you got data")
+    console.log(data)
+
+    var ctx1 = document.getElementById('version2').getContext('2d');
+    var chart1 = new Chart(ctx1, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My Newer Dataset',
+                backgroundColor: 'rgb(255, 255, 204)',
+                pointBackgroundColor: 'rgb(115,243,200',
+                borderColor: 'rgb(255, 99, 132)',
+                data: data
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            title: {
+                display: true,
+                text: 'Monthly Values'
+            }
+        }
+    });
+
+})
+
+</script>
+
+<h1> Version 3</h1>
+<p>For my last version, I changed the colors once again just to mark the differences in graphs. I also updated the tooltips to take out the dataset designation. Since there is only one data source on the graph, it doesn't feel necessary to have it written again in the toolip. I also updated the outline of the tooltip key to match the color of the actual data point just for consistency.</p>
+
+<canvas id="version3"></canvas>
+
+<script type="text/javascript">
+
+$.getJSON("data.json", function(data){
+
+    console.log("hey you got data")
+    console.log(data)
+    var ctx2 = document.getElementById('version3').getContext('2d');
+    var chart2 = new Chart(ctx2, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My Newer Dataset',
+                backgroundColor: 'rgb(255, 229, 204)',
+                pointBackgroundColor: 'rgb(115,243,200)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: data
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            tooltips: {
+                callbacks: {
+                labelColor: function(tooltipItem, data){
+                    return {
+                        borderColor: 'rgb(0,255,0)',
+                        backgroundColor: 'rgb(115,243,200)'
+                    };
+                },
+
+                label: function(tooltipItem, data) {
+                    var label = data.label || '';
+
+                    if (label) {
+                        label += ': ';
+                    }
+                    label += Math.round(tooltipItem.yLabel * 100) / 100;
+                    return label;
+                }
+            }
+        }
+
+
+        }
+    });
+
+})
+
+</script>
+
+</body>
+</html>
